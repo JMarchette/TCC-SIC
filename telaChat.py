@@ -14,13 +14,13 @@ class MainWindow(QMainWindow):
         # criação do painel cinza superior
         self.painelEsquerdo = QLabel(self)
         self.painelEsquerdo.setStyleSheet('background-color: #545454;')  # cor do fundo do painel
-        self.painelEsquerdo.setGeometry(150, 0, 600, 60)  # posição e tamanho do painel
+        self.painelEsquerdo.setGeometry(150, 0, 610, 60)  # posição e tamanho do painel
         self.painelEsquerdo.setAlignment(Qt.AlignCenter)
 
         # criação do painel cinza inferior
         self.painelEsquerdo = QLabel(self)
         self.painelEsquerdo.setStyleSheet('background-color: #545454;')  # cor do fundo do painel
-        self.painelEsquerdo.setGeometry(150, 440, 600, 60)  # posição e tamanho do painel
+        self.painelEsquerdo.setGeometry(150, 440, 610, 60)  # posição e tamanho do painel
         self.painelEsquerdo.setAlignment(Qt.AlignCenter)
 
 
