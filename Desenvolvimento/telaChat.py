@@ -31,6 +31,8 @@ class MainWindow(QMainWindow):
                 print(f"Erro na solicitação à API: {response.status_code}")
                 print(response.text)
 
+        self.campoTexto.clear()
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setMinimumSize(800, 500)
