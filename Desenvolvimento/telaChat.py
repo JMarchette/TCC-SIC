@@ -1,3 +1,4 @@
+import requests
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit
 from PyQt5.QtGui import QFont, QPixmap, QIcon
 from PyQt5.QtCore import Qt, QSize
@@ -6,6 +7,30 @@ import sys
 #import matplotlib.pyplot as plt
 
 class MainWindow(QMainWindow):
+
+    def enviarPergunta(self):
+        mensagem = self.campoTexto.text()  # Obter o texto do campo de texto
+        if mensagem:
+            # Chamar a API apenas se houver uma mensagem
+            API_KEY = "COLOCAR API AQUI"
+            response = requests.post(
+                "https://api.openai.com/v1/engines/text-davinci-002/completions",
+                headers={"Authorization": f"Bearer {API_KEY}"},
+                json={"prompt": mensagem, "temperature": 0.9, "max_tokens": 100},
+            )
+
+            if response.status_code == 200:
+                response_json = response.json()
+                if "choices" in response_json:
+                    resposta = response_json["choices"][0]["text"]
+                    # Exibir a resposta (você pode exibi-la onde desejar)
+                    print("Resposta da API:", resposta)
+                else:
+                    print("Erro: Resposta inesperada da API.")
+            else:
+                print(f"Erro na solicitação à API: {response.status_code}")
+                print(response.text)
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setMinimumSize(800, 500)
@@ -42,7 +67,7 @@ class MainWindow(QMainWindow):
 
         # botão enviar
         self.botaoEnviar = QPushButton(self)
-        # self.botaoEnviar.clicked.connect(self.voltarHome)
+        self.botaoEnviar.clicked.connect(self.enviarPergunta)
         self.botaoEnviar.setStyleSheet(
             'background-color: transparent; color: black; border: none;')  # cor do fundo e do texto do botão
         self.botaoEnviar.setGeometry(170, 455, 1100, 30)  # posição e tamanho do botão
@@ -121,6 +146,8 @@ class MainWindow(QMainWindow):
         self.painelEsquerdo.setAlignment(Qt.AlignLeft)
 
         ###########################################
+
+
 
 
 # Declaração dos elementos da tela
