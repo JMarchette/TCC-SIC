@@ -1,13 +1,26 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel
-from PyQt5.QtGui import QFont, QPixmap, QIcon
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout
+from PyQt5.QtGui import QFont, QPixmap, QIcon, QDesktopServices
+from PyQt5.QtCore import Qt, QSize, QUrl
 import sys
 #from skimage.transform import resize
 #import matplotlib.pyplot as plt
 
-class MainWindow(QMainWindow):
+class TelaHome(QMainWindow):
+
+    """def telaconversar(self):
+        self.hide()  # Oculta a janela atual (Chat)
+        telaChat.show()  # Mostra a janela "Conversar Agora"""
+
+    #FUNÇÃO DO BOTÃO AJUDA
+    def solicitarSuporte(self):
+        QDesktopServices.openUrl(QUrl("www.sp.senai.br/fale-conosco?menu=39&idescola=109"))
+
+    #FUNÇÃO DO BOTÃO CURSOS
+    def consultarCursos(self):
+        QDesktopServices.openUrl(QUrl("https://sp.senai.br/cursos/"))
+
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super(TelaHome, self).__init__()
         self.setMinimumSize(800, 500)
         self.setMaximumSize(800, 500)
 
@@ -35,8 +48,6 @@ class MainWindow(QMainWindow):
         # Função de teste dos botões
         self.conversarAgora = lambda: print("O botão chat foi clicado!")
         self.voltarHome = lambda: print("O botão home foi clicado!")
-        self.consultarCursos = lambda : print("O botão cursos foi clicado")
-        self.ajuda = lambda : print("O botão ajuda foi clicado")
 
         ###########################################
 
@@ -56,6 +67,8 @@ class MainWindow(QMainWindow):
             box-shadow: 0 0 10px 5px white;
         ''')
         self.botaoConversar.setGeometry(40, 400, 150, 30)  # posição e tamanho do botão
+        self.botaoConversar.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
+
 
         ###########################################
 
@@ -85,24 +98,28 @@ class MainWindow(QMainWindow):
         self.botaoHome.setStyleSheet('background-color: transparent; color: black; border: none;') # cor do fundo e do texto do botão
         self.botaoHome.setGeometry(10, 25, 80, 30) # posição e tamanho do botão
         # Criando o ícone de casa
-        iconeCasa = QIcon(r"C:\Users\user\Desktop\testeee\Imagens\iconeCasa.png")
+        iconeCasa = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeCasa.png")
 
         # Definindo o ícone do botão "Home" e seu tamanho
         self.botaoHome.setIcon(iconeCasa)
         self.botaoHome.setIconSize(QSize(20, 20))
+        self.botaoHome.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
+
 
         ###########################################
 
         # Propriedades do "botão" chat
         self.botaoChat = QPushButton("Chat", self)
         self.botaoChat.setFont(self.fontePadrao)
-        self.botaoChat.clicked.connect(self.conversarAgora)
+        #self.botaoChat.clicked.connect(self.conversarAgora())
         self.botaoChat.setStyleSheet('background-color: transparent; color: black; border: none;') # cor do fundo e do texto do botão
         self.botaoChat.setGeometry(90, 25, 80, 30) # posição e tamanho do botão
         #Icone do botão chat
-        iconeChat = QIcon(r"C:\Users\user\Desktop\testeee\Imagens\iconeChat.png")
+        iconeChat = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeChat.png")
         self.botaoChat.setIcon(iconeChat)
         self.botaoChat.setIconSize(QSize(20, 20))
+        self.botaoChat.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
+
 
         ###########################################
 
@@ -113,9 +130,11 @@ class MainWindow(QMainWindow):
         self.botaoCursos.setStyleSheet('background-color: transparent; color: black; border: none;')
         self.botaoCursos.setGeometry(170, 25, 80, 30)  # posição e tamanho do botão
         # Icone do botão cursos
-        iconeCursos = QIcon(r"C:\Users\user\Desktop\testeee\Imagens\iconeCursos.png")
+        iconeCursos = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeCursos.png")
         self.botaoCursos.setIcon(iconeCursos)
         self.botaoCursos.setIconSize(QSize(20, 20))
+        self.botaoCursos.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
+
 
         ###########################################
 
@@ -123,20 +142,21 @@ class MainWindow(QMainWindow):
         # Propriedades do "botão" Ajuda
         self.botaoAjuda = QPushButton("Ajuda", self)
         self.botaoAjuda.setFont(self.fontePadrao)
-        self.botaoAjuda.clicked.connect(self.ajuda)
+        self.botaoAjuda.clicked.connect(self.solicitarSuporte)
         self.botaoAjuda.setStyleSheet('background-color: transparent; color: black; border: none;')
         self.botaoAjuda.setGeometry(260, 25, 80, 30)  # posição e tamanho do botão
 
-        iconeAjuda = QIcon(r"C:\Users\user\Desktop\testeee\Imagens\iconeAjuda.png")
+        iconeAjuda = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeAjuda.png")
         self.botaoAjuda.setIcon(iconeAjuda)
         self.botaoAjuda.setIconSize(QSize(30, 30))
+        self.botaoAjuda.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
 
 
 
 
 # Declaração dos elementos da tela
 app = QApplication([])
-window = MainWindow()
+window = TelaHome()
 window.setWindowTitle("Tela inicial") # título da janela
 window.setGeometry(100, 100, 800, 500) # tamanho e posição da janela
 window.setStyleSheet('background-color: black;') # cor do fundo da janela
@@ -144,3 +164,5 @@ window.show()
 
 
 sys.exit(app.exec_())
+
+
