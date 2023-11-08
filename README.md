@@ -7,7 +7,7 @@ O TCC SIC (TCC - Trabalho de Conclusão de Curso; SIC - Samsung Innovation Campu
 O projeto utiliza uma API da OpenAI (sim, aquela do ChatGPT) e busca informações na internet para responder perguntas feitas pelo usuário dentro da caixa de texto da telaChat
 Com o objetivo de aprofundar o projeto, futuramente serão realizadas outras implementações que irão agregar na eficiência do projeto, como a conexão com outras APIs disponíveis no mercado, adição de funções especiais de acessibilidade e outros elementos...
 
-# :construction: Instruções:
+# 📚 Instruções:
 Para rodar o projeto é necessário ter o python instalado e fazer a instalação de bibliotecas como PyQT5
 
 # :construction: Status do projeto: :construction:
