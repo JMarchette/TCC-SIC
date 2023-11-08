@@ -1,7 +1,7 @@
 # TCC-SIC
 
 # 📁 Informações sobre o projeto:
-O TCC SIC (TCC - Trabalho de Conclusão de Curso; SIC - Samsung Innovation Campus) consiste em um projeto de criar uma assistente virtual voltada para o Senai e suas necessidades, respondendo dúvidas sobre os usuários sobre os cursos, falando sobre o Senai e sua história, além de oportunidades e outros elementos relacionados aos cursos oferecidos pelo Senai SP.
+O TCC SIC (TCC - Trabalho de Conclusão de Curso; SIC - Samsung Innovation Campus) consiste em um projeto de criar uma assistente virtual voltada para o Senai e suas necessidades, respondendo dúvidas dos usuários sobre os cursos, falando sobre o Senai e sua história, além de oportunidades e outros elementos relacionados aos cursos oferecidos pelo Senai SP.
 
 # 🛠️ Funcionalidades e desenvolvimento:
 O projeto utiliza uma API da OpenAI (sim, aquela do ChatGPT) e busca informações na internet para responder perguntas feitas pelo usuário dentro da caixa de texto da telaChat
