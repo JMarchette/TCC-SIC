@@ -36,11 +36,11 @@ class TelaChat(QMainWindow):
         telaHome.destroyed.connect(telaChat.show)
 
     def enviarPergunta(self):
-        self.campoTexto.clear()
         mensagem = self.campoTexto.text()  # Obter o texto do campo de texto
+        self.campoTexto.clear()
         if mensagem:
             # Chamar a API apenas se houver uma mensagem
-            API_KEY = "COLOCAR API AQUI"
+            API_KEY = "INSERIR A API AQUI"
             response = requests.post(
                 "https://api.openai.com/v1/engines/text-davinci-002/completions",
                 headers={"Authorization": f"Bearer {API_KEY}"},
