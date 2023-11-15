@@ -10,6 +10,12 @@ class TelaHome(QMainWindow):
     """def telaconversar(self):
         self.hide()  # Oculta a janela atual (Chat)
         telaChat.show()  # Mostra a janela "Conversar Agora"""
+    def homeSenai(self):
+        QDesktopServices.openUrl(QUrl("https://sp.senai.br/"))
+
+    def sobreProjeto(self):
+        QDesktopServices.openUrl(QUrl("https://github.com/JMarchette/TCC-SIC/blob/main/README.md"))
+
 
     #FUNÇÃO DO BOTÃO AJUDA
     def solicitarSuporte(self):
@@ -19,10 +25,16 @@ class TelaHome(QMainWindow):
     def consultarCursos(self):
         QDesktopServices.openUrl(QUrl("https://sp.senai.br/cursos/"))
 
+    def direcionarSIC(self):
+        QDesktopServices.openUrl(QUrl("https://sicbrasil.org.br/"))
+
     def __init__(self):
         super(TelaHome, self).__init__()
         self.setMinimumSize(800, 500)
         self.setMaximumSize(800, 500)
+        # Definindo a fonte padrão
+        self.fontePadrao = QFont("Montserrat", 12)
+        self.setWindowIcon(QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeSelene.jpg"))
 
         #criação do painel vermelho esquerdo
         self.painelEsquerdo = QLabel(self)
@@ -50,9 +62,6 @@ class TelaHome(QMainWindow):
         self.voltarHome = lambda: print("O botão home foi clicado!")
 
         ###########################################
-
-        # Definindo a fonte padrão
-        self.fontePadrao = QFont("Montserrat", 12)
 
        # Propriedades do botão "conversar agora"
         self.botaoConversar = QPushButton("Conversar agora!", self)
@@ -92,11 +101,11 @@ class TelaHome(QMainWindow):
         ###########################################
 
         # Propriedades do "botão" home
-        self.botaoHome = QPushButton("Home", self)
+        self.botaoHome = QPushButton("Home", self.painelEsquerdo)
         self.botaoHome.setFont(self.fontePadrao)
-        self.botaoHome.clicked.connect(self.voltarHome)
+        self.botaoHome.clicked.connect(self.homeSenai)
         self.botaoHome.setStyleSheet('background-color: transparent; color: black; border: none;') # cor do fundo e do texto do botão
-        self.botaoHome.setGeometry(10, 25, 80, 30) # posição e tamanho do botão
+        self.botaoHome.setGeometry(10, 5, 80, 30) # posição e tamanho do botão
         # Criando o ícone de casa
         iconeCasa = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeCasa.png")
 
@@ -109,11 +118,11 @@ class TelaHome(QMainWindow):
         ###########################################
 
         # Propriedades do "botão" chat
-        self.botaoChat = QPushButton("Chat", self)
+        self.botaoChat = QPushButton("Chat", self.painelEsquerdo)
         self.botaoChat.setFont(self.fontePadrao)
         #self.botaoChat.clicked.connect(self.conversarAgora())
         self.botaoChat.setStyleSheet('background-color: transparent; color: black; border: none;') # cor do fundo e do texto do botão
-        self.botaoChat.setGeometry(90, 25, 80, 30) # posição e tamanho do botão
+        self.botaoChat.setGeometry(90, 5, 80, 30) # posição e tamanho do botão
         #Icone do botão chat
         iconeChat = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeChat.png")
         self.botaoChat.setIcon(iconeChat)
@@ -124,11 +133,11 @@ class TelaHome(QMainWindow):
         ###########################################
 
         # Propriedades do "botão" cursos
-        self.botaoCursos = QPushButton("Cursos", self)
+        self.botaoCursos = QPushButton("Cursos", self.painelEsquerdo)
         self.botaoCursos.setFont(self.fontePadrao)
         self.botaoCursos.clicked.connect(self.consultarCursos)
         self.botaoCursos.setStyleSheet('background-color: transparent; color: black; border: none;')
-        self.botaoCursos.setGeometry(170, 25, 80, 30)  # posição e tamanho do botão
+        self.botaoCursos.setGeometry(170, 5, 80, 30)  # posição e tamanho do botão
         # Icone do botão cursos
         iconeCursos = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeCursos.png")
         self.botaoCursos.setIcon(iconeCursos)
@@ -140,11 +149,11 @@ class TelaHome(QMainWindow):
 
 
         # Propriedades do "botão" Ajuda
-        self.botaoAjuda = QPushButton("Ajuda", self)
+        self.botaoAjuda = QPushButton("Ajuda", self.painelEsquerdo)
         self.botaoAjuda.setFont(self.fontePadrao)
         self.botaoAjuda.clicked.connect(self.solicitarSuporte)
         self.botaoAjuda.setStyleSheet('background-color: transparent; color: black; border: none;')
-        self.botaoAjuda.setGeometry(260, 25, 80, 30)  # posição e tamanho do botão
+        self.botaoAjuda.setGeometry(260, 5, 80, 30)  # posição e tamanho do botão
 
         iconeAjuda = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeAjuda.png")
         self.botaoAjuda.setIcon(iconeAjuda)
@@ -152,6 +161,43 @@ class TelaHome(QMainWindow):
         self.botaoAjuda.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
 
 
+        #Botão SIC
+        self.botaoSIC = QPushButton(self.painelDireito)
+        self.botaoSIC.setFont(self.fontePadrao)
+        self.botaoSIC.clicked.connect(self.direcionarSIC)
+        self.botaoSIC.setStyleSheet(
+            'background-color: transparent; color: black; border: none;')  # cor do fundo e do texto do botão
+        self.botaoSIC.setGeometry(5, 50, 200, 170)  # posição e tamanho do botão
+        # Criando o ícone de casa
+        iconeSIC = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\sicFundo.png")
+
+        # Definindo o ícone do botão "Home" e seu tamanho
+        self.botaoSIC.setIcon(iconeSIC)
+        self.botaoSIC.setIconSize(QSize(170, 170))
+        self.botaoSIC.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
+
+        # Logo Senai
+        self.botaoSenai = QPushButton(self.painelDireito)  # Adicione o painel como o widget pai do botão
+        self.botaoSenai.setFont(self.fontePadrao)
+        self.botaoSenai.clicked.connect(self.conversarAgora)
+        self.botaoSenai.setStyleSheet(
+            'background-color: transparent; color: black; border: none;')  # cor do fundo e do texto do botão
+        self.botaoSenai.setGeometry(25, -30, 150, 150)  # posição e tamanho do botão
+        # Criando o ícone de casa
+        iconeSIC = QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\logoSenai.png")
+
+        # Definindo o ícone do botão "Home" e seu tamanho
+        self.botaoSenai.setIcon(iconeSIC)
+        self.botaoSenai.setIconSize(QSize(150, 150))
+
+        # Sobre o projeto
+        self.botaoProjeto = QPushButton("Sobre o projeto", self.painelDireito)  # Adicione o painel como o widget pai do botão
+        self.botaoProjeto.setFont(self.fontePadrao)
+        self.botaoProjeto.clicked.connect(self.sobreProjeto)
+        self.botaoProjeto.setStyleSheet(
+            'background-color: transparent; color: black; border: none;')  # cor do fundo e do texto do botão
+        self.botaoProjeto.setGeometry(25, 350, 150, 150)  # posição e tamanho do botão
+        self.botaoProjeto.setCursor(Qt.PointingHandCursor)  # Muda o cursor do mouse para cursor de mão
 
 
 # Declaração dos elementos da tela
