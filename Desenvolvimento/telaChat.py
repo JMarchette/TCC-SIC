@@ -1,5 +1,5 @@
 import requests
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QVBoxLayout, QTextEdit
 from PyQt5.QtGui import QFont, QPixmap, QIcon, QDesktopServices
 from PyQt5.QtCore import Qt, QSize, QUrl
 import sys
@@ -38,23 +38,46 @@ class TelaChat(QMainWindow):
     def enviarPergunta(self):
         mensagem = self.campoTexto.text()  # Obter o texto do campo de texto
         self.campoTexto.clear()
+
         if mensagem:
             # Chamar a API apenas se houver uma mensagem
-            API_KEY = "INSERIR A API AQUI"
+            API_KEY = "Colocar API aqui"
+
+            # Instrução para limitar a resposta a 267 caracteres
+            instrucoesAPI = [
+                "Mantenha as respostas relacionadas ao tema de cursos profissionais.",
+                "NÃO responda com informações não relacionadas ao contexto educacional do Senai São Paulo.",
+                "Mantenha as respostas relacionadas ao tema de cursos realizados pela Samsung.",
+                "NÃO responda com informações não relacionadas ao contexto educacional da Samsung.",
+                "NÃO responda qualquer coisa fora do tema educacional e não fale de outras empresas além de Samsung e Senai"
+                "Responda com NO MÁXIMO 267 CARACTERES",
+                "Caso o usuário faça qualquer pergunta fora do tema dessas instruções peça desculpas e diga que você fala apenas sobre temas educacionais\n"
+            ]
+
+            # Construir o prompt com instruções temáticas
+            prompt = "\n".join(instrucoesAPI + [
+                "Você é uma assistente virtual do Senai Vila Mariana e da Samsung.",
+                f"Usuário: {mensagem}"
+            ])
             response = requests.post(
                 "https://api.openai.com/v1/engines/text-davinci-002/completions",
                 headers={"Authorization": f"Bearer {API_KEY}"},
-                json={"prompt": mensagem, "temperature": 0.9, "max_tokens": 100},
+                json={"prompt": prompt, "temperature": 0.9, "max_tokens": 100},
             )
 
             if response.status_code == 200:
                 response_json = response.json()
                 if "choices" in response_json:
-                    resposta = response_json["choices"][0]["text"]
-                    # Exibir a resposta (você pode exibi-la onde desejar)
-                    print("Resposta da API:", resposta)
+                    resposta = response_json["choices"][0]["text"].strip()  # Remover espaços em branco extras
+                    self.chatTextEdit.setTextColor(Qt.white)
+                    font = QFont("Montserrat", 16)  # Definir a fonte como Arial e o tamanho como 14
+                    self.chatTextEdit.setFont(font)
+                    self.chatTextEdit.append(f"Você: {mensagem}")
+                    self.chatTextEdit.setTextColor(Qt.gray)
+                    self.chatTextEdit.append(f"Selene: {resposta}")
                 else:
                     print("Erro: Resposta inesperada da API.")
+
             else:
                 print(f"Erro na solicitação à API: {response.status_code}")
                 print(response.text)
@@ -63,6 +86,23 @@ class TelaChat(QMainWindow):
         super(TelaChat, self).__init__()
         self.setMinimumSize(800, 500)
         self.setMaximumSize(800, 500)
+        self.setWindowIcon(QIcon(r"C:\Users\user\Desktop\Projeto senai\Desenvolvimento\Imagens\iconeSelene.jpg"))
+
+        '''# Adiciona QLabel para exibir a mensagem do usuário
+        self.labelMensagemUsuario = QLabel(self)
+        self.labelMensagemUsuario.setGeometry(160, 410, 530, 30)
+        self.labelMensagemUsuario.setStyleSheet('color: #FFFFFF; background-color: transparent; font-size: 16px;')
+
+        # Adiciona QLabel para exibir a resposta da API
+        self.labelRespostaAPI = QLabel(self)
+        self.labelRespostaAPI.setGeometry(160, 480, 530, 30)
+        self.labelRespostaAPI.setStyleSheet('color: #FFFFFF; background-color: transparent; font-size: 16px;')'''
+
+        # Criação do QTextEdit para exibir as mensagens
+        self.chatTextEdit = QTextEdit(self)
+        self.chatTextEdit.setGeometry(149, 59, 602, 382)  # posição e tamanho do QTextEdit
+        self.chatTextEdit.setReadOnly(True)  # torna o QTextEdit somente leitura
+        self.chatTextEdit.setStyleSheet("color: white;")
 
         # Definindo a fonte padrão
         self.fontePadrao = QFont("Montserrat", 12)
