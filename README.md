@@ -11,5 +11,5 @@ Com o objetivo de aprofundar o projeto, futuramente serão realizadas outras imp
 Para rodar o projeto é necessário ter o python instalado e fazer a instalação de bibliotecas como PyQT5
 
 <h1 align="center"> :construction: Status do projeto: :construction: </h1>
-<p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/></p>
+<p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/></p>
 
